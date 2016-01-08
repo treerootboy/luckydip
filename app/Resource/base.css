@@ -3,27 +3,36 @@
 	src:url('./FZZDHJW.TTF');
 }
 
+.Center {
+	display: block;
+	margin: 0 auto;
+}
+
 body {
 	-moz-user-select:none;
 	-webkit-user-select:none;
 	user-select:none; 
 	box-sizing: border-box;
-	font-family: fzzt;
 	margin: 0;
 	padding: 0;
 	background: #eb3535 url('./img/bg.png') no-repeat center top;
 }
 
 .container {
+	composes: Center;
 	position: relative;
-    width: 100%;
-    min-height: 237px;
+    width: 1301px;
+    height: 237px;
     background: url('./img/tle.png') no-repeat left top;
 	background-size: contain;
 }
 
 .topBtnGroup {
-	position: absolute;
-	right: 63px;
-	top: 35px;
+	padding: 35px 0 0 1074px;
+}
+
+.body {
+	composes: Center;
+    width: 1288px;
+    height: 570px;
 }

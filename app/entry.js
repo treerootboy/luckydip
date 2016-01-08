@@ -1,7 +1,9 @@
 global.$ = require('jquery');
 global.baseStyle = require('./Resource/base.css');
 
-var ReactDOM = require('react-dom');
-var React = require('react');
+import { Router, Route, Link } from 'react-router'
+import React from 'react'
+import { render } from 'react-dom'
+
 var App = require('./App.js');
-ReactDOM.render(<App />, document.getElementById('react-container'));
+render(<App />, document.getElementById('react-container'));
