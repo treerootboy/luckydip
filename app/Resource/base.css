@@ -28,11 +28,11 @@ body {
 }
 
 .topBtnGroup {
-	padding: 35px 0 0 1074px;
+	padding: 35px 0 35px 1074px;
 }
 
 .body {
 	composes: Center;
-    width: 1288px;
+    width: 1200px;
     height: 570px;
 }

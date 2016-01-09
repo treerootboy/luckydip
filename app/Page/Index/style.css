@@ -1,0 +1,33 @@
+.container {
+	display: flex;
+}
+
+.info {
+	font-family: fzzt;
+    background: #fff;
+    border-radius: 10px;
+    width: 100%;
+    margin: 10px 0 0 18px;
+    color: #e63c3d;
+    text-align: center;
+}
+
+.title {
+	font-size: 3em;
+	font-weight: normal;
+	margin: 0.7em auto;
+}
+
+.selectNum {
+	font-size: 2em;
+	margin: 1em auto;
+}
+
+.selectNum b {
+	font-size: 3.5em;
+	padding: 0 10px;
+}
+
+.total {
+	font-size: 1.8em;
+}
