@@ -7,6 +7,11 @@ var config = {
 		path: './build',
 		filename: '[hash].js'
 	},
+	resolve: {
+		alias: {
+			'react-with-addons': path.join(__dirname, 'node_modules/react/addons.js')
+		}
+	},
 	module: {
 		loaders: [
 			{ test: /\.jsx?$/, loaders: ['babel'], include: path.join(__dirname, 'app') },

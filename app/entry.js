@@ -17,6 +17,15 @@ var Index = page('Index');
 var Happy = page('Happy');
 var Supper = page('Supper');
 
+var sql = require('./Resource/db.sql');
+var db = global.openDatabase('mydb', '1.0', 'my first database', 2 * 1024 * 1024);
+db.transaction(function (tx) {
+	sql.split(';\n').map((l)=>{
+		tx.executeSql(l, [], function(){}, function(a, e){console.log(l, e);});
+	});
+	tx.executeSql('UPDATE member SET level = 1 WHERE month >= 12');
+	tx.executeSql('UPDATE member SET level = 0 WHERE name in ("张伟", "冯海云") OR month<12');
+});
 
 render(
 <Router>

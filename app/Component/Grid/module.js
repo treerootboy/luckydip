@@ -35,11 +35,11 @@ module.exports = React.createClass({
 	componentWillReceiveProps: function(nextProps) {
 		var rowGroup = [], row = [];
 		nextProps.data.map((v, i)=>{
-			if (row.length==nextProps.col) {
+			row.push(v);
+			if (row.length==nextProps.col || i==nextProps.data.length-1) {
 				rowGroup.push(row);
 				row = [];
 			}
-			row.push(v);
 		});
 		this.setState({data: rowGroup});
 	},

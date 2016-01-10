@@ -25,10 +25,11 @@ body {
     height: 237px;
     background: url('./img/tle.png') no-repeat left top;
 	background-size: contain;
+	z-index: 4;
 }
 
 .topBtnGroup {
-	padding: 35px 0 35px 1074px;
+	padding: 35px 0 35px 1020px;
 }
 
 .body {

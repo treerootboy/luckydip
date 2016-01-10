@@ -8,7 +8,8 @@ var HappyName = component('HappyName')
 module.exports = React.createClass({
   getInitialState: function() {
     return {
-      data:[] 
+      data:[],
+      show: false
     };
   },
   componentDidMount() {
@@ -19,12 +20,16 @@ module.exports = React.createClass({
     this.setState({data:btns});
   },
   cellRender(data){
-    return <HappyName />
+    return <HappyName show={this.state.show}/>
+  },
+  getHappy(){
+    this.setState({show: true});
   },
   render(){
     return (
       <div>
         <Grid col={6} data={this.state.data} cellRender={this.cellRender} />
+        <Button type="happy" onClick={this.getHappy}>抽取一轮开心奖</Button>
       </div>
     );
   }

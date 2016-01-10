@@ -12,6 +12,7 @@
 .common a {
     color: #fff;
     text-decoration: none;
+    display: block;
 }
 
 .conform {
@@ -47,8 +48,20 @@
     composes: common;
     width: 164px;
     height: 52px;
-    line-height: 48px;
     font-size: 30px;
+    line-height: 52px;
     background: -webkit-linear-gradient(top,#ff7717,#eb6101);
     border-radius: 5px;
+}
+
+.BigBase {
+    composes: common;
+    width: 290px;
+    height: 78px;
+    line-height: 76px;
+    font-size: 48px;
+    text-shadow: 2px 2px 1px rgba(0,0,0,.3);
+    box-shadow: none;
+    background: #eb6100;
+    cursor: default;
 }
