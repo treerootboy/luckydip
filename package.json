@@ -2,11 +2,12 @@
   "name": "webpack-reactjs",
   "version": "1.0.0",
   "description": "",
-  "main": "app/main.js",
+  "main": "main.js",
   "scripts": {
     "dev": "webpack-dev-server --progress --colors --hot --inline --content-base build --config webpack.dev.js",
-    "build": "webpack --progress --colors --config webpack.build.js",
-    "start": "electron main.js"
+    "build-osx": "webpack --progress --colors --config webpack.build.js && electron-packager ./build luckydip --platform=darwin --arch=x64 --version=0.36.0 --app-version=1.0.0 --overwrite",
+    "build-win": "webpack --progress --colors --config webpack.build.js && electron-packager ./build luckydip --platform=win32 --arch=ia32 --version=0.36.0 --app-version=1.0.0 --overwrite",
+    "start": "electron build/main.js"
   },
   "keywords": [
     "webpack",
@@ -28,6 +29,7 @@
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.1.18",
     "css-loader": "latest",
+    "electron-packager": "^5.2.0",
     "electron-prebuilt": "^0.36.2",
     "html-webpack-plugin": "^1.7.0",
     "jsx-loader": "latest",

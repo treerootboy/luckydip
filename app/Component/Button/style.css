@@ -39,7 +39,7 @@
     composes: common;
     width: 290px;
     height: 178px;
-    font-size: 100px;
+    font-size: 90px;
     line-height: 170px;
     background: -webkit-linear-gradient(top,#ec2e2f,#d90102);
 }

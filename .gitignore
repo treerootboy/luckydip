@@ -3,3 +3,5 @@ index.html
 bundle.js
 npm-debug*
 build/
+.DS_Store
+luckydip-*/

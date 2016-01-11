@@ -16,10 +16,7 @@ function createWindow () {
 
   // and load the index.html of the app.
   //mainWindow.loadURL('file://' + __dirname + '/build/index.html');
-  mainWindow.loadURL('http://localhost:8080');
-
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  mainWindow.loadURL('file://' + __dirname + '/index.html');
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {

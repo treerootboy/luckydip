@@ -11,7 +11,7 @@ module.exports = React.createClass({
 					<div className={global.baseStyle.topBtnGroup}>
 						<Button><Link to="/">抽大奖名单</Link></Button>
 						<Button><Link to="/happy">抽取开心奖</Link></Button>
-						<Button><Link to="/supper">抽超级大奖</Link></Button>
+						<Button><Link to="/supper">开奖</Link></Button>
 					</div>
 				</div>
 				<div className={global.baseStyle.body}>

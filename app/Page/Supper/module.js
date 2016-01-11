@@ -24,7 +24,6 @@ module.exports = React.createClass({
 	},
 	AnimationCompleted: false,
 	onAnimationCompleted(){
-		console.log(Date()+'stop');
 		this.setState({showName: '黎明'});
 	},
 	animationStep(step){
@@ -52,7 +51,7 @@ module.exports = React.createClass({
 							var y = interpolatedStyles[interpolatedStyles.length-1].y;
 							if (!this.AnimationCompleted && this.stopValue==Math.ceil(y)-20) {
 								this.AnimationCompleted = true;
-								setTimeout(this.onAnimationCompleted, 20);
+								setTimeout(this.onAnimationCompleted, 2000);
 				      		}
 
 							return <div className={Style.scrollBox}>
@@ -89,10 +88,10 @@ module.exports = React.createClass({
 					<div className={Style.scrollStick}></div>
 				</div>
 				<div className={Style.info}>
-					<Button type="BigBase">抽取主管奖</Button><br/><br/>
+					<Button type="BigBase">主管奖</Button><br/><br/>
 					{this.state.scrollStep == 1 ?
-					<Button type="start" onClick={this.stop}>停止</Button>
-					: <Button type="start" onClick={this.start}>开始</Button>}
+					<Button type="start" onClick={this.stop}>STOP</Button>
+					: <Button type="start" onClick={this.start}>GO</Button>}
 					<div className={Style.least}>剩余：6</div>
 				</div>
 				{this.state.showName && <NameBanner name={this.state.showName} onClose={this.close}/>}
