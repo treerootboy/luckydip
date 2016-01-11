@@ -5,37 +5,17 @@ import path from 'path'
 
 global.$ = require('jquery');
 global.baseStyle = require('./Resource/base.css');
-global.component = function(name) {
-	return require('./Component/' + name + '/module.js');
-}
-global.page = function(name) {
-	return require('./Page/' + name + '/module.js');
-}
+global.component = function(name) {return require('./Component/' + name + '/module.js');}
+global.page = function(name) {return require('./Page/' + name + '/module.js');}
+global.model = function(name) {return require('./Model/' + name + '.js');}
 
 var Main = page('Main');
 var Index = page('Index');
 var Happy = page('Happy');
 var Supper = page('Supper');
 
-var sql = require('./Resource/db.sql');
-var db = global.openDatabase('mydb', '1.0', 'my first database', 2 * 1024 * 1024);
-function initDb(tx, sql){
-	sql.split(';\n').map((l)=>{
-		tx.executeSql(l, [], function(){}, function(a, e){console.log(l, e);});
-	});
-	tx.executeSql('UPDATE member SET level = 2 WHERE month >= 12');
-	tx.executeSql('UPDATE member SET level = 1 WHERE name in ("张伟", "冯海云") OR month<12');
-	tx.executeSql('UPDATE member SET level = 0 WHERE month <2');
-}
-db.transaction(function (tx) {
-	tx.executeSql('SELECT * FROM member', [], function(tx, result){
-		if (results.rows.length !== 145) {
-			initDb(tx, sql);
-		}
-	}, function(tx, error){
-		initDb(tx, sql);
-	});
-});
+model('DB').initDB();
+model('Member').prepareData();
 
 render(
 <Router>

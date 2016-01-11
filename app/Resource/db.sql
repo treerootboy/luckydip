@@ -1,4 +1,5 @@
 CREATE TABLE IF NOT EXISTS member (id unique, name, join_date, month, level);
+
 REPLACE INTO member (id, name, join_date, month, level) VALUES ("003", "余文华", "2000/04/28", 188, "");
 REPLACE INTO member (id, name, join_date, month, level) VALUES ("006", "赵仕保", "2004/12/22", 132, "");
 REPLACE INTO member (id, name, join_date, month, level) VALUES ("012", "王树群", "2005/05/16", 127, "");
