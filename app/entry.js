@@ -14,8 +14,11 @@ var Index = page('Index');
 var Happy = page('Happy');
 var Supper = page('Supper');
 
-model('DB').initDB();
-model('Member').prepareData();
+
+model('DB').initDB().then(function(){
+	model('prepareBigBonus').prepareData();
+})
+
 
 render(
 <Router>

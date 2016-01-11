@@ -7,7 +7,7 @@ const bigBonus = 'bigBonus';
 module.exports = {
 
 	/*获得大奖的名单*/
-	getBigBonus: function(){
+	getBigBonus(){
 		var result = store.get(bigBonus);
 		if (!result) {
 			result = [];
@@ -17,7 +17,7 @@ module.exports = {
 	},
 
 	/*添加大奖名单*/
-	addBigBonus: function(member){
+	addBigBonus(member){
 		var result = this.getBigBonus();
 		if (result.length==config.bigBonus.count) {
 			alert('大奖已经抽完，请不要再抽了！');
@@ -26,6 +26,8 @@ module.exports = {
 		result.push(member);
 	},
 
-
+	pick(){
+		
+	}
 
 };
