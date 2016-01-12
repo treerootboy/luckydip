@@ -4,14 +4,23 @@ import {StaggeredMotion, Motion, spring, presets} from 'react-motion'
 var Style = require('./style.css');
 var Button = component('Button');
 var NameBanner = component('NameBanner');
+var BigBonus = model('BigBonus');
 const AnimationStart = true;
+
+var AnimationCompleted = true;
 
 module.exports = React.createClass({
 	getInitialState() {
 		return {
 			showNum: "000",
 			scrollStep: 0,
-			result: false
+			result: false,
+			bonusName: '',
+			showName: false,
+			step: {
+		        name: '',
+		        count: 0
+		    }
 		};
 	},
 	Y(i) {
@@ -22,9 +31,10 @@ module.exports = React.createClass({
 		var num = Number(this.state.showNum[i]);
 		return 58-190*(/*要显示的数字*/num+/*根据位数再加1圈*/i*10+/*至少转50圈*/50);
 	},
-	AnimationCompleted: false,
+	AnimationCompleted: true,
 	onAnimationCompleted(){
-		this.setState({showName: '黎明'});
+		this.AnimationCompleted = true;
+		this.setState({showName: true});
 	},
 	animationStep(step){
 		switch(step) {
@@ -37,30 +47,30 @@ module.exports = React.createClass({
 				    </div>
 				}).bind(this);
 			case 2:
+				var self = this;
 				return (function(){
-					this.AnimationCompleted = false;
 					return <StaggeredMotion
 						defaultStyles={[{y: 58, delay: 0}, {y: 58, delay: 0}, {y:58, delay: 0}]} 
 						styles={prevStyles => prevStyles.map((v, i) => {
-							this.stopValue = this.Y(i);
-							v.y = spring(this.stopValue, [20, 10]);
+							self.stopValue = self.Y(i);
+							v.y = spring(self.stopValue, [20, 10]);
 							v.delay = i*0.5;
 							return v;
 						  })}>
 						{interpolatedStyles => {
 							var y = interpolatedStyles[interpolatedStyles.length-1].y;
-							if (!this.AnimationCompleted && this.stopValue==Math.ceil(y)-20) {
-								this.AnimationCompleted = true;
-								setTimeout(this.onAnimationCompleted, 2000);
+							if (!AnimationCompleted && self.stopValue==Math.ceil(y)-20) {
+								AnimationCompleted = true;
+								setTimeout(self.onAnimationCompleted, 100);
 				      		}
 
 							return <div className={Style.scrollBox}>
-						      {interpolatedStyles.map(((style, i) => {
+						      {interpolatedStyles.map((style, i) => {
 						        	return <div key={i} style={{backgroundPositionY: style.y}} className={Style.scrollNum}></div>
-						      }).bind(this))}
+						      })}
 						    </div>
 						 }}
-					</StaggeredMotion>}).bind(this);
+					</StaggeredMotion>});
 			default:
 				return (function(){
 					return <div className={Style.scrollBox}>
@@ -72,13 +82,33 @@ module.exports = React.createClass({
 		};
 	},
 	start() {
-		this.setState({showNum: "000", scrollStep: 1, result: false});
+		var step = BigBonus.getStep();
+		if (!this.AnimationCompleted || step.completed) return;
+		BigBonus.checkPrepare();
+		this.setState({bonusName: '', showNum: "000", scrollStep: 1, result: false, showName:false});
+		this.AnimationCompleted = false;
 	},
 	stop() {
-		this.setState({showNum: "159", scrollStep: 2, result: true});
+		var member = BigBonus.pick();
+		this.setState({bonusName: member.name, showNum: member.id, scrollStep: 2, result: true, showName:false});
+		AnimationCompleted = false;
 	},
 	close(){
+		BigBonus.nextStep();
 		this.setState({showName:false});
+	},
+	componentDidMount() {
+		BigBonus.nextStep();
+		var step = BigBonus.getStep();
+		var pickPack = BigBonus.getCurrentPickPack();
+		step.leave = step.count - pickPack.length;
+		this.setState({step:step});
+	},
+	componentWillUpdate(nextProps, nextState) {
+		var step = BigBonus.getStep();
+		var pickPack = BigBonus.getCurrentPickPack();
+		step.leave = step.count - pickPack.length;
+		nextState.step = step;
 	},
 	render(){
 		return (
@@ -88,13 +118,13 @@ module.exports = React.createClass({
 					<div className={Style.scrollStick}></div>
 				</div>
 				<div className={Style.info}>
-					<Button type="BigBase">主管奖</Button><br/><br/>
+					<Button type="BigBase">{this.state.step.name}</Button><br/><br/>
 					{this.state.scrollStep == 1 ?
 					<Button type="start" onClick={this.stop}>STOP</Button>
 					: <Button type="start" onClick={this.start}>GO</Button>}
-					<div className={Style.least}>剩余：6</div>
+					<div className={Style.least}>剩余：{this.state.step.leave}</div>
 				</div>
-				{this.state.showName && <NameBanner name={this.state.showName} onClose={this.close}/>}
+				{this.state.showName && <NameBanner name={this.state.bonusName} onClose={this.close}/>}
 			</div>
 		);
 	}

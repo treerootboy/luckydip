@@ -1,10 +1,7 @@
 module.exports = {
 	"prepareBigBonus": {
-		"count": 102
-	},
-	"bigBonus": /*大奖配置*/{
-		"count": 56,
-		"namelist": /*大奖名单抽取顺序*/[
+		"count": 102,
+		"lottery": /*大奖名单抽取顺序*/[
 			{"name": "吴总",  "count": 10},
 			{"name": "张总",  "count": 10},
 			{"name": "邱副总", "count": 10},
@@ -12,6 +9,9 @@ module.exports = {
 			{"name": "美慧姐", "count": 8},
 			{"name": "余姐", "count": 8},
 		],
+	},
+	"bigBonus": /*大奖配置*/{
+		"count": 56,
 		"lottery": /*大獎抽取順序*/ [
 			{"name": "主管奖", "count": 4},
 			{"name": "第一轮刮刮乐", "count": 5},
@@ -31,6 +31,7 @@ module.exports = {
 		]
 	},
 	"happyBonus": {
+		"initCount": 37, //不能抽大奖人数
 		"count": 83,
 		"lottery": [
 			{"name": "第一轮开心奖", "count": 30},

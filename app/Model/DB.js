@@ -17,16 +17,16 @@ module.exports = {
 	initDB(){
 		var self = this;
 		return new Promise((resolve, reject)=> {
+			console.log("初始化数据库");
 			self.instance().transaction(tx=>{
 				tx.executeSql('SELECT * FROM member', [], (tx, result)=>{
 					if (result.rows.length !== 145) {
 						self.initSql(tx, sql);
-						resolve();
 					}
 				}, (tx, error)=>{
 					self.initSql(tx, sql);
-					resolve();
 				});
+				resolve();
 			});
 		});
 	},

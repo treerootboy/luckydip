@@ -8,12 +8,18 @@ module.exports = React.createClass({
 	},
 	getDefaultProps() {
 		return {
-			readonly: false
+			readonly: false,
+			selected: false
 		};
 	},
+	componentDidMount() {
+		this.setState({selected: this.props.selected});
+	},
 	clickHandler(e){
-		!this.props.readonly && this.setState({selected: !this.state.selected});
-		this.props.onSelect && this.props.onSelect(this.state.selected, this.props.value);
+		if(this.props.onSelect){
+			if(!this.props.onSelect(this.state.selected, this.props.value))return;
+		}
+		this.setState({selected: !this.state.selected});
 	},
 	render(){
 		return <label className={this.state.selected?Style.selected:Style.base}>

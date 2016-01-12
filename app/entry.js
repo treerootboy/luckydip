@@ -16,7 +16,8 @@ var Supper = page('Supper');
 
 
 model('DB').initDB().then(function(){
-	model('prepareBigBonus').prepareData();
+	model('PrepareBigBonus').prepareData();
+	model('HappyBonus').prepareData();
 })
 
 

@@ -1,3 +1,20 @@
+@media print {
+	:global(div.print) {
+		display: inline !important;
+		font-family: Arial !important;
+		font-size: 15px !important;
+		color: #000 !important;
+		position: static !important;
+	}
+	:global(div.print *) {
+		display: inline !important;
+		font-family: Arial !important;
+		font-size: 15px !important;
+		color: #000 !important;
+		position: static !important;
+	}
+}
+
 @font-face{
 	font-family: fzzt;
 	src:url('./FZZDHJW.TTF');

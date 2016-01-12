@@ -6,7 +6,7 @@ var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 module.exports = React.createClass({
 	render(){
-		return <div className={Style.container}>
+		return <div className={[Style.container, 'print'].join(' ')}>
 			   	<Motion defaultStyle={{val: 0}} style={{val:this.props.show?spring(200):0}}>
 			   		{current => {
 			   			const {val} = current;
@@ -16,7 +16,7 @@ module.exports = React.createClass({
 			   			return <div key="mask" style={style} className={Style.mask}></div>;
 			   		}}
 				</Motion>
-				<div key="text" className={Style.name}>text</div>
+				<div key="text" className={Style.name}>{this.props.children}</div>
 		</div>
 	}
 });

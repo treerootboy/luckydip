@@ -1,3 +1,8 @@
+@media print {
+    .common {
+        display: none !important;
+    }
+}
 .common {
     display: block;
     border-radius: 10px;
@@ -27,12 +32,14 @@
 
 .happy {
     composes: common;
+    display: inline-block;
     width: 367px;
     height: 70px;
     line-height: 70px;
     border-radius: 10px;
     font-size: 42px;
     background: -webkit-linear-gradient(top,#ec2e2f,#d90102);
+    margin: 0 20px;
 }
 
 .start {
