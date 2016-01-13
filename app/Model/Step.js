@@ -10,10 +10,12 @@ module.exports = function(model){
 
 		/* 获取当前抽奖人 */
 		getStep(){
-			var step = config.lottery[this._getCurrentStepNumber()];
+			var index = this._getCurrentStepNumber();
+			var step = config.lottery[index];
 			if (!step) {
 				return {name:'已抽完！', count:0, completed: true}
 			}
+			step.index = index;
 			return step;
 		},
 

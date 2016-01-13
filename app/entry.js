@@ -3,7 +3,6 @@ import React from 'react'
 import { render } from 'react-dom'
 import path from 'path'
 
-global.$ = require('jquery');
 global.baseStyle = require('./Resource/base.css');
 global.component = function(name) {return require('./Component/' + name + '/module.js');}
 global.page = function(name) {return require('./Page/' + name + '/module.js');}
