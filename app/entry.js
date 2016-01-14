@@ -13,6 +13,7 @@ var Main = page('Main');
 var Index = page('Index');
 var Happy = page('Happy');
 var Supper = page('Supper');
+var Print = page('Print');
 
 
 model('DB').initDB().then(function(){
@@ -28,4 +29,5 @@ render(
 		<Route path="happy" component={Happy} />
 		<Route path="supper" component={Supper} />
 	</Route>
+	<Route path="/print" component={Print} />
 </Router>, document.getElementById('react-container')); 

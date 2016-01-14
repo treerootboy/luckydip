@@ -1,0 +1,14 @@
+.container {
+	margin: 0 auto;
+	width: 90%;
+}
+
+@media print {
+    body{
+        background: none !important;
+        height: 500px;
+    }
+    .noPrint {
+        display: none;
+    }
+}

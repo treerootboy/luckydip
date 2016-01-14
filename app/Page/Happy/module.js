@@ -68,7 +68,6 @@ module.exports = React.createClass({
         <Grid col={6} data={this.state.data} cellRender={this.cellRender} />
         {this.state.data.length==0 ? <div style={{height: 200}}></div> : ''}
         {this.state.show ? <div style={{textAlign:'center'}}>
-            <Button type="happy" onClick={this.print}>打印</Button>
             <Button type="happy" onClick={this.next}>下一轮</Button>
           </div> :
         <div style={{textAlign:'center'}}><Button type="happy" onClick={this.getHappy}>{this.state.step.name}</Button></div>}

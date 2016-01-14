@@ -2,10 +2,16 @@ var path = require("path");
 var webpack = require("webpack");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 var config = {
-	entry: './app/entry.js',
+	entry: {
+		app: './app/entry.js',
+		config: ['./app/config.json']
+	},
 	output: {
 		path: './build',
-		filename: 'app.js'
+		filename: '[name].js'
+	},
+	externals: {
+		config: './app/config.js'
 	},
 	resolve: {
 		alias: {
@@ -17,6 +23,7 @@ var config = {
 			{ test: /\.jsx?$/, loaders: ['babel'], include: path.join(__dirname, 'app') },
 			{ test: /\.css$/, loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]' },
 			{ test: /\.(eot|woff|ttf|svg|woff2|jpg|png|gif|mp3|wav)$/i, loader: 'url' },
+			{ test: /\.json$/i, loader: 'json' },
 			{ test: /\.(sql)$/i, loader: 'raw' }
 		]
 	},
@@ -26,6 +33,7 @@ var config = {
             template: './app/index.html'
         }),
         new webpack.optimize.UglifyJsPlugin({
+        	exclude: /config\.js/i,
 		    compress: {
 		        warnings: false
 		    }

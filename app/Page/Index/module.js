@@ -5,6 +5,8 @@ var FaceButton = component('FaceButton')
 var Grid = component('Grid')
 var PrepareBigBonus = model('PrepareBigBonus');
 var BigBonus = model('BigBonus');
+var selectedAduio = require('url!../../Resource/sound/select.mp3');
+var wrongAduio = require('url!../../Resource/sound/wrong.mp3');
 
 var Style = require('./style.css')
 
@@ -46,7 +48,16 @@ module.exports = React.createClass({
 	},
 
 	onSelectFace(selected, value){
-		selected ? PrepareBigBonus.unpick(value.index) : PrepareBigBonus.pick(value.index);
+		global.wrong = this.refs.wrong;
+		try{
+			selected ? PrepareBigBonus.unpick(value.index) : PrepareBigBonus.pick(value.index);
+		} catch(e) {
+			this.refs.wrong.pause();
+			this.refs.wrong.play();
+			throw e;
+		}
+		this.refs.select.pause();
+		this.refs.select.play();
 		this.updateStep();
 		return true;
 	},
@@ -59,15 +70,17 @@ module.exports = React.createClass({
 	render(){
 		return (
 			<div className={global.baseStyle.body}>
-			<div className={Style.container}>
-				<Grid col={13} data={this.state.data} cellRender={this.cellRender} />
-				<div className={Style.info}>
-					<h1 className={Style.title}>{this.state.step.name}</h1>
-					<div className={Style.selectNum}>剩余<b>{this.state.step.leave}</b></div>
-					<div className={Style.total}>总计：已选 {this.state.total.picked} 剩余 {this.state.total.leave}</div>
-					<Button type="conform" onClick={this.onConfirm}>确定</Button>
+				<div className={Style.container}>
+					<Grid col={13} data={this.state.data} cellRender={this.cellRender} />
+					<div className={Style.info}>
+						<h1 className={Style.title}>{this.state.step.name}</h1>
+						<div className={Style.selectNum}>剩余<b>{this.state.step.leave}</b></div>
+						<div className={Style.total}>总计：已选 {this.state.total.picked} 剩余 {this.state.total.leave}</div>
+						<Button type="conform" onClick={this.onConfirm}>确定</Button>
+					</div>
 				</div>
-			</div>
+				<audio ref="wrong"/>
+				<audio ref="select"/>
 			</div>
 		);
 	}

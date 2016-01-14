@@ -56,6 +56,7 @@ module.exports = extend(Step(happyBonus), {
 							.slice(0, 30)
 							.map(v=>{
 								v.selected = true;
+								v.step = step.index;
 								return v;
 							});
 		this._setCurrentPickPack(pickPack);

@@ -128,7 +128,7 @@ module.exports = React.createClass({
 				</div>
 				{this.state.showName && <NameBanner name={this.state.bonusName} onClose={this.close}/>}
 			</div>
-			{!this.AnimationCompleted && <audio autoPlay src={startAudio}/>}
+			<audio autoPlay src={startAudio}></audio>
 			</div>
 		);
 	}

@@ -5,14 +5,10 @@ const electron = require('electron');
 const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
-
 const globalShortcut = electron.globalShortcut;
-
 const ipcMain = electron.ipcMain;
-
 const dialog = electron.dialog;
 
-const Menu = electron.remote.Menu;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -20,24 +16,11 @@ let mainWindow, printWindow;
 
 function createWindow () {
 
-    mainWindow = new BrowserWindow({width: 1360, height: 790, fullscreen: true});
+    mainWindow = new BrowserWindow({width: 1360, height: 790});
     mainWindow.loadURL('file://' + __dirname + '/index.html');
     mainWindow.on('closed', function() {
         mainWindow = null;
     });
-
-    var menu = new Menu();
-    menu.append(new MenuItem({ 
-        label: '打印', 
-        click: fucntion(){
-            printWindow = new BrowserWindow({width: 800, height: 600});
-            printWindow.loadURL('file://' + __dirname + '/index.html#/print');
-            printWindow.on('closed', function() {
-                printWindow = null;
-            });
-            printWindow.show();
-        }
-    }));
 
     globalShortcut.register('ctrl+alt+r', function() {
         dialog.showMessageBox(mainWindow, {
@@ -59,11 +42,24 @@ function createWindow () {
     });
 
     globalShortcut.register('ctrl+r', function() {
-        mainWindow.webContents.reload();
+        mainWindow && mainWindow.isFocused() && mainWindow.webContents.reload();
+        printWindow && printWindow.isFocused() && printWindow.webContents.reload();
     });
 
     globalShortcut.register('esc', function() {
-        mainWindow.setFullScreen(!(mainWindow.isFullScreen()));
+        mainWindow && mainWindow.isFocused() && mainWindow.setFullScreen(!(mainWindow.isFullScreen()));
+        printWindow && printWindow.isFocused() && printWindow.setFullScreen(!(printWindow.isFullScreen()));
+    });
+
+    globalShortcut.register('ctrl+p', function(){
+        if (!printWindow) {
+            printWindow = new BrowserWindow({width: 800, height: 600});
+            printWindow.loadURL('file://' + __dirname + '/index.html#/print');
+            printWindow.on('closed', function() {
+                printWindow = null;
+            });
+        }
+        printWindow.show();
     });
 }
 
