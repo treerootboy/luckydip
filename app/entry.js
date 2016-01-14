@@ -2,6 +2,7 @@ import { browserHistory, Router, Route, IndexRoute, Link } from 'react-router'
 import React from 'react'
 import { render } from 'react-dom'
 import path from 'path'
+import store from 'store'
 
 global.baseStyle = require('./Resource/base.css');
 global.component = function(name) {return require('./Component/' + name + '/module.js');}

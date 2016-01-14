@@ -14,9 +14,7 @@ module.exports = React.createClass({
 						<Button><Link to="/supper">开奖</Link></Button>
 					</div>
 				</div>
-				<div className={global.baseStyle.body}>
-					{this.props.children}
-				</div>
+				{this.props.children}
 			</div>
 		);
 	}

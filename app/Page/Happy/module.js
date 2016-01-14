@@ -28,16 +28,17 @@ module.exports = React.createClass({
     return <HappyName show={data.show}>{data.name}</HappyName>
   },
   getHappy(){
+    if(this.showing) return;
     var step = HappyBonus.getStep();
     if (step.completed) return;
     if (step.index == 0){
-
       HappyBonus.pick();
     }
     var data = HappyBonus.getCurrentPickPack();
     console.log(data);
     this.show(data);
   },
+  showing: false,
   show(data){
     setTimeout((function(){
       var l = data.filter(v=>{return !v.show;}).length;
@@ -45,7 +46,9 @@ module.exports = React.createClass({
         data[data.length-l].show = true;
         this.setState({data:data});
         this.show(data);
+        this.showing = true;
       } else {
+        this.showing = false;
         this.setState({show:true});
       }
     }).bind(this), 800);
@@ -61,7 +64,7 @@ module.exports = React.createClass({
   },
   render(){
     return (
-      <div>
+      <div className={global.baseStyle.body}>
         <Grid col={6} data={this.state.data} cellRender={this.cellRender} />
         {this.state.data.length==0 ? <div style={{height: 200}}></div> : ''}
         {this.state.show ? <div style={{textAlign:'center'}}>

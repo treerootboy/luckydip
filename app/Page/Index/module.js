@@ -58,6 +58,7 @@ module.exports = React.createClass({
 
 	render(){
 		return (
+			<div className={global.baseStyle.body}>
 			<div className={Style.container}>
 				<Grid col={13} data={this.state.data} cellRender={this.cellRender} />
 				<div className={Style.info}>
@@ -66,6 +67,7 @@ module.exports = React.createClass({
 					<div className={Style.total}>总计：已选 {this.state.total.picked} 剩余 {this.state.total.leave}</div>
 					<Button type="conform" onClick={this.onConfirm}>确定</Button>
 				</div>
+			</div>
 			</div>
 		);
 	}

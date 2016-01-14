@@ -5,28 +5,30 @@
     right: 0px;
     bottom: 0px;
     z-index: 50;
-    background: rgba(0,0,0,.7);
+    background: rgba(0,0,0,.5);
     display: block;
 }
 
 .banner {
-	position: fixed;
-    top: 50%;
-    left: 0px;
+    margin: 0 auto;
+    position: relative;
     z-index: 52;
-    width: 100%;
-    height: 240px;
+    width: 960px;
+    height: 650px;
     line-height: 224px;
-    margin: -120px 0 0 0;
     font-size: 180px;
-    color: #fee510;
+    color: #e3384a;
     text-align: center;
     letter-spacing: 50px;
-    background: rgba(0,0,0,.8);
+    background: url('../../Resource/img/popbox.png') no-repeat -5px 0;
     font-weight: 700;
+    top: 60px;
 }
 
 .name {
+    margin: 0 auto;
+    padding-top: 230px;
+    padding-left: 40px;
 }
 
 .close {
@@ -39,7 +41,7 @@
     line-height: 68px;
     font-size: 90px;
     text-indent: 8px;
-    background: #d00405;
     color: #fff;
+    text-indent: -999em;
     cursor: pointer;
 }

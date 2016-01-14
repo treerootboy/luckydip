@@ -5,9 +5,9 @@
   "main": "main.js",
   "scripts": {
     "dev": "webpack-dev-server --progress --colors --hot --inline --content-base build --config webpack.dev.js",
-    "build-osx": "webpack --progress --colors --config webpack.build.js && electron-packager ./build luckydip --platform=darwin --arch=x64 --version=0.36.0 --app-version=1.0.0 --overwrite",
-    "build-win": "webpack --progress --colors --config webpack.build.js && electron-packager ./build luckydip --platform=win32 --arch=ia32 --version=0.36.0 --app-version=1.0.0 --overwrite",
-    "start": "electron build/main.js"
+    "build-osx": "webpack --progress --colors --config webpack.build.js && electron-packager ./build luckydip --platform=darwin --arch=x64 --version=0.36.0 --app-version=1.0.0 --overwrite --asar",
+    "build-win": "webpack --progress --colors --config webpack.build.js && electron-packager ./build luckydip --platform=win32 --arch=ia32 --version=0.36.0 --app-version=1.0.0 --overwrite --asar",
+    "start": "webpack --progress --colors --config webpack.build.js && electron build/main.js"
   },
   "keywords": [
     "webpack",

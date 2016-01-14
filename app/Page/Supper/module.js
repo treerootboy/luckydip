@@ -5,6 +5,7 @@ var Style = require('./style.css');
 var Button = component('Button');
 var NameBanner = component('NameBanner');
 var BigBonus = model('BigBonus');
+var startAudio = require('url!../../Resource/sound/start.mp3');
 const AnimationStart = true;
 
 var AnimationCompleted = true;
@@ -85,8 +86,8 @@ module.exports = React.createClass({
 		var step = BigBonus.getStep();
 		if (!this.AnimationCompleted || step.completed) return;
 		BigBonus.checkPrepare();
-		this.setState({bonusName: '', showNum: "000", scrollStep: 1, result: false, showName:false});
 		this.AnimationCompleted = false;
+		this.setState({bonusName: '', showNum: "000", scrollStep: 1, result: false, showName:false});
 	},
 	stop() {
 		var member = BigBonus.pick();
@@ -112,6 +113,7 @@ module.exports = React.createClass({
 	},
 	render(){
 		return (
+			<div style={this.state.showName?{position: 'relative', zIndex: 100}:{}} className={global.baseStyle.body}>
 			<div className={Style.container}>
 				<div className={Style.bounes}>
 					{this.animationStep(this.state.scrollStep)()}
@@ -125,6 +127,8 @@ module.exports = React.createClass({
 					<div className={Style.least}>剩余：{this.state.step.leave}</div>
 				</div>
 				{this.state.showName && <NameBanner name={this.state.bonusName} onClose={this.close}/>}
+			</div>
+			{!this.AnimationCompleted && <audio autoPlay src={startAudio}/>}
 			</div>
 		);
 	}
