@@ -3,6 +3,8 @@ import React from 'react'
 var Button = component('Button')
 var FaceButton = component('FaceButton')
 var Grid = component('Grid')
+var TipsBanner = component('TipsBanner')
+
 var PrepareBigBonus = model('PrepareBigBonus');
 var BigBonus = model('BigBonus');
 var selectedAduio = require('url!../../Resource/sound/select.mp3');
@@ -21,7 +23,8 @@ module.exports = React.createClass({
 			total: {
 				picked: '',
 				leave: ''
-			}
+			},
+			tipsClose: true
 		};
 	},
 	cellRender(data){
@@ -63,8 +66,14 @@ module.exports = React.createClass({
 	},
 
 	onConfirm(){
+		if (!this.state.tipsClose) return;
 		PrepareBigBonus.nextStep();
+		this.setState({tipsClose: false});
 		this.updateStep();
+	},
+
+	closeTips(){
+		this.setState({tipsClose: true});
 	},
 
 	render(){
@@ -74,13 +83,14 @@ module.exports = React.createClass({
 					<Grid col={13} data={this.state.data} cellRender={this.cellRender} />
 					<div className={Style.info}>
 						<h1 className={Style.title}>{this.state.step.name}</h1>
-						<div className={Style.selectNum}>剩余<b>{this.state.step.leave}</b></div>
+						<div className={Style.selectNum}>已选 {this.state.step.picked} 剩余<b>{this.state.step.leave}</b></div>
 						<div className={Style.total}>总计：已选 {this.state.total.picked} 剩余 {this.state.total.leave}</div>
 						<Button type="conform" onClick={this.onConfirm}>确定</Button>
 					</div>
 				</div>
-				<audio ref="wrong"/>
-				<audio ref="select"/>
+				<audio ref="wrong" src={wrongAduio}/>
+				<audio ref="select" src={selectedAduio}/>
+				{!this.state.tipsClose && <TipsBanner name="幸运儿已诞生！" onClose={this.closeTips}/>}
 			</div>
 		);
 	}

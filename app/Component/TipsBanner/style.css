@@ -1,0 +1,45 @@
+.mask {
+	position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 50;
+    background: rgba(0,0,0,.5);
+    display: block;
+}
+
+.banner {
+    margin: 0 auto;
+    position: relative;
+    z-index: 52;
+    width: 640px;
+    height: 400px;
+    text-align: center;
+    background: rgb(255,247,221);
+    top: 100px;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.name {
+    margin: 0 auto;
+    width: 500px;
+    padding-top: 150px;
+    font-size: 70px;
+    color: rgb(249, 0, 55);
+}
+
+.close {
+	position: absolute;
+    right: 0px;
+    top: 0px;
+    z-index: 3;
+    width: 60px;
+    height: 60px;
+    line-height: 50px;
+    font-size: 70px;
+    color: #fff;
+    background-color: rgb(229, 0, 0);
+    cursor: pointer;
+}
