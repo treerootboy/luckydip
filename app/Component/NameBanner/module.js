@@ -2,7 +2,7 @@ import React from 'react-with-addons'
 import {TransitionMotion, Motion, spring, presets} from 'react-motion'
 
 var Style = require('./style.css');
-var duang = require('url!../../Resource/sound/duang.mp3');
+var duang = require('../../Resource/sound/duang.mp3');
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 module.exports = React.createClass({

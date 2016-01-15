@@ -9,17 +9,20 @@ var HappyBonus = model('HappyBonus');
 module.exports = React.createClass({
 	getInitialState() {
 		return {
-			step: {
-				name: ''
-			},
-			data: {}
+			data: {},
+			index: 0
 		};
 	},
 	componentDidMount() {
-		var step = HappyBonus.getStep();
-		var data = HappyBonus.getAll().filter(v=>{return v.selected && v.step==step.index;});
+		var data = HappyBonus.getAll().filter(v=>{return v.selected && v.step==this.state.index;});
 		global.document.body.style.background = 'none';
-		this.setState({step: step, data: data});
+		this.setState({data: data});
+	},
+	componentWillUpdate(nextProps, nextState) {
+		var data = HappyBonus.getAll()
+					.filter(v=>{ return v.selected && v.step==nextState.index; })
+					.sort((a,b)=>{ return a.name.localeCompare(b.name); });
+		nextState.data = data;
 	},
 	cellRender(data){
 		return <div style={{padding: 10}}>{data.name}</div>;
@@ -27,12 +30,25 @@ module.exports = React.createClass({
 	print(){
 		global.print();
 	},
+	selectStep(e){
+		this.setState({index: Number(e.target.value)});
+	},
 	render(){
 		return (
 			<div className={Style.container}>
-				<h3>{this.state.step.name}名单，共{this.state.step.count}名</h3>
-				<Grid col={6} data={this.state.data} cellRender={this.cellRender}/>
 				<div className={Style.noPrint}>
+					<h1>开心奖名单
+						<select style={{marginLeft: 100}} onChange={this.selectStep}>
+							{([1,2,3]).map(v=>{
+								return <option key={v} value={v-1}>第{v}轮</option>
+							})}
+						</select>
+					</h1>
+				</div>
+				<div style={{minHeight: 200}}>
+				<Grid col={6} data={this.state.data} cellRender={this.cellRender}/>
+				</div>
+				<div style={{width: 200}} className={Style.noPrint}>
 					<Button onClick={this.print}>打印</Button>
 				</div>
 			</div>

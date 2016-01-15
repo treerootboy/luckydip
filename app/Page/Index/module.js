@@ -7,8 +7,8 @@ var TipsBanner = component('TipsBanner')
 
 var PrepareBigBonus = model('PrepareBigBonus');
 var BigBonus = model('BigBonus');
-var selectedAduio = require('url!../../Resource/sound/select.mp3');
-var wrongAduio = require('url!../../Resource/sound/wrong.mp3');
+var selectedAduio = require('../../Resource/sound/select.mp3');
+var wrongAduio = require('../../Resource/sound/wrong.mp3');
 
 var Style = require('./style.css')
 
@@ -56,10 +56,12 @@ module.exports = React.createClass({
 			selected ? PrepareBigBonus.unpick(value.index) : PrepareBigBonus.pick(value.index);
 		} catch(e) {
 			this.refs.wrong.pause();
+			this.refs.select.src = wrongAduio;
 			this.refs.wrong.play();
 			throw e;
 		}
 		this.refs.select.pause();
+		this.refs.select.src = selectedAduio;
 		this.refs.select.play();
 		this.updateStep();
 		return true;
@@ -83,7 +85,7 @@ module.exports = React.createClass({
 					<Grid col={13} data={this.state.data} cellRender={this.cellRender} />
 					<div className={Style.info}>
 						<h1 className={Style.title}>{this.state.step.name}</h1>
-						<div className={Style.selectNum}>已选 {this.state.step.picked} 剩余<b>{this.state.step.leave}</b></div>
+						<div className={Style.selectNum}>已选 <b>{this.state.step.picked}</b> 剩余<b>{this.state.step.leave}</b></div>
 						<div className={Style.total}>总计：已选 {this.state.total.picked} 剩余 {this.state.total.leave}</div>
 						<Button type="conform" onClick={this.onConfirm}>确定</Button>
 					</div>

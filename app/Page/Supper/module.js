@@ -5,7 +5,7 @@ var Style = require('./style.css');
 var Button = component('Button');
 var NameBanner = component('NameBanner');
 var BigBonus = model('BigBonus');
-var startAudio = require('url!../../Resource/sound/start.mp3');
+var startAudio = require('../../Resource/sound/start.mp3');
 const AnimationStart = true;
 
 var AnimationCompleted = true;
@@ -128,7 +128,7 @@ module.exports = React.createClass({
 				</div>
 				{this.state.showName && <NameBanner name={this.state.bonusName} onClose={this.close}/>}
 			</div>
-			<audio autoPlay src={startAudio}></audio>
+			{!this.AnimationCompleted && <audio loop autoPlay src={startAudio}></audio>}
 			</div>
 		);
 	}
